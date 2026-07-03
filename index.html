@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vokabeltrainer (JS) — Mehrere Listen</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    .row { display:flex; gap:.5rem; align-items:center; margin-bottom:.5rem; flex-wrap:wrap; }
+    input[type="text"], select { padding:.4rem; flex:1; min-width:180px; }
+    button { padding:.4rem .7rem; }
+    #log { white-space:pre-wrap; background:#f7f7f7; padding:1rem; border-radius:6px; max-height:240px; overflow:auto; }
+    #wordList { max-height:200px; overflow:auto; border:1px solid #ddd; padding:.5rem; border-radius:6px; background:#fff; min-width:320px; }
+    .item { display:flex; justify-content:space-between; gap:1rem; padding:.2rem .1rem; border-bottom:1px solid #eee; }
+    .small { font-size:.9rem; color:#666; }
+    .danger { color:#a00; }
+    header { display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vokabeltrainer (mehrere Listen)</h1>
+    <div>
+      <label for="listSelect" class="small">Aktive Liste:</label>
+      <select id="listSelect"></select>
+    </div>
+  </header>
+
+  <section>
+    <h2>Liste verwalten</h2>
+    <div class="row">
+      <input id="newListInput" type="text" placeholder="Neue Liste (z.B. Spanisch)" />
+      <button id="createListBtn">Liste erstellen</button>
+      <button id="deleteListBtn" class="danger">Liste löschen</button>
+    </div>
+    <div class="small">Jede Liste hat eigene Vokabeln, Zeit- und Statistikdaten.</div>
+  </section>
+
+  <section>
+    <h2>Wort hinzufügen</h2>
+    <div class="row">
+      <input id="wortInput" type="text" placeholder="Wort (z.B. casa)" />
+      <input id="ueInput" type="text" placeholder="Übersetzung (z.B. Haus)" />
+      <button id="addBtn">Erstellen</button>
+      <button id="clearListBtn" title="Alle Wörter der aktuellen Liste löschen">Liste leeren</button>
+    </div>
+    <div class="small">Tipp: Schnelles Klicken wird durch Debounce vermieden.</div>
+  </section>
+
+  <section>
+    <h2>Wortliste</h2>
+    <div id="wordList"></div>
+  </section>
+
+  <section>
+    <h2>Lern-Modus</h2>
+    <div class="row">
+      <button id="learnBtn">Lernen starten</button>
+      <button id="stopLearnBtn" disabled>Stop</button>
+    </div>
+    <div id="quiz" style="display:none; margin-top:1rem;">
+      <div id="frage" style="font-weight:bold; margin-bottom:.5rem;"></div>
+      <div class="row">
+        <input id="antwortInput" type="text" placeholder="Deine Antwort" />
+        <button id="submitAnswerBtn">Prüfen</button>
+        <button id="secondAttemptBtn" disabled title="Wird nach 20s freigeschaltet">2. Versuch</button>
+      </div>
+      <div id="status" class="small" style="margin-top:.5rem;"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Log / Feedback</h2>
+    <div id="log">Bereit.</div>
+  </section>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
